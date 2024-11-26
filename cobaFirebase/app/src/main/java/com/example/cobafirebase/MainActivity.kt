@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.SimpleAdapter
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -57,16 +58,37 @@ class MainActivity : AppCompatActivity() {
             TambahData(db, _etProvinsi.text.toString(), _etIbukota.text.toString())
         }
         readData(db)
+
+        _lvData.setOnItemLongClickListener { parent, view, position, id ->
+            val namaPro = data[position].get("Pro")
+
+            if (namaPro != null) {
+                db.collection("tbProvinsi")
+                    .document(namaPro)
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.d("Firebase", "Berhasil dihapus")
+                        readData(db)
+                    }
+                    .addOnFailureListener { e->
+                        Log.w("Firebase", e.message.toString())
+                    }
+            }
+            true
+        }
+
     }
 
     fun TambahData(db: FirebaseFirestore, Provinsi: String, IbuKota: String) {
         val dataBaru = daftarProvinsi(Provinsi, IbuKota)
         db.collection("tbProvinsi")
-            .add(dataBaru)
+            .document(dataBaru.provinsi)
+            .set(dataBaru)
             .addOnSuccessListener {
                 _etProvinsi.setText("")
                 _etIbukota.setText("")
                 Log.d("Firebase", "Data Berhasil Disimpan")
+                readData(db)
             }
             .addOnFailureListener {
                 Log.d("Firease", it.message.toString())
