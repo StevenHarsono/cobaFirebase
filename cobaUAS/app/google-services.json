@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "226793996203",
+    "project_id": "cobauasc14220053",
+    "storage_bucket": "cobauasc14220053.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226793996203:android:daa4155fe223d568f71cee",
+        "android_client_info": {
+          "package_name": "com.example.cobauas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDva-URidFmG7RfwTXm-Qe9QbukUKSHN6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
